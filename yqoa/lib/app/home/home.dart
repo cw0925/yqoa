@@ -1,69 +1,45 @@
 import 'package:flutter/material.dart';
+import 'mock_data.dart';
+import 'programme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Home extends StatefulWidget {
-  @override
-  HomeState createState() => new HomeState();
-}
-
-class HomeState extends State<Home> {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new Scaffold(
-        body: new Container(
-          child: this.renderBody()
-        ),
-      ),
-    );
-  }
-  List<String> getDataList() {
-    List<String> list = [];
-    for (int i = 0; i < 6; i++) {
-      list.add(i.toString());
-    }
-    return list;
-  }
-  Widget getItemContainer(String item) {
-    return Container(
-      width: 5.0,
-      height: 5.0,
-      alignment: Alignment.center,
-      child: Text(
-        item,
-        style: TextStyle(color: Colors.white, fontSize: 20),
-      ),
-      color: Colors.blue,
-    );
-  }
-  List<Widget> getWidgetList() {
-    return getDataList().map((item) => getItemContainer(item)).toList();
-  }
+class Home extends StatelessWidget {
   Widget renderHeader() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      padding: EdgeInsets.symmetric(vertical: ScreenUtil.statusBarHeight, horizontal: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
-            '猜你喜欢',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF333333),
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                '04月22日',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF333333),
+                ),
+              ),
+              Text(
+                '张三',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF333333),
+                ),
+              ),
+            ],
           ),
           Row(
             children: <Widget>[
-              Text(
-                '更多',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Color(0xFF666666),
-                ),
+              Icon(
+                Icons.wb_sunny,
+                size: 20,
+                color: Color(0xFF999999),
               ),
               Icon(
-                Icons.keyboard_arrow_right,
+                Icons.keyboard_voice,
                 size: 20,
                 color: Color(0xFF999999),
               ),
@@ -73,29 +49,31 @@ class HomeState extends State<Home> {
       ),
     );
   }
+
   Widget renderBody() {
-    return Container(
-      child: GridView.count(
-        //水平子Widget之间间距
-        crossAxisSpacing: 10.0,
-        //垂直子Widget之间间距
-        mainAxisSpacing: 30.0,
-        //GridView内边距
-        padding: EdgeInsets.all(10.0),
-        //一行的Widget数量
+    return GridView.builder(
+      shrinkWrap: true,
+      itemCount: programmeList.length,
+      physics: NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        //子Widget宽高比例
-        childAspectRatio: 2.0,
-        //子Widget列表
-        children: getWidgetList(),
-      )
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1,
+      ),
+      itemBuilder: (context, index) {
+        return Programme(data: programmeList[index]);
+      },
+
     );
   }
-  Widget renderHome() {
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      child: ListView(
         children: <Widget>[
           this.renderHeader(),
           this.renderBody(),
@@ -103,5 +81,4 @@ class HomeState extends State<Home> {
       ),
     );
   }
-
 }

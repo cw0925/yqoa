@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 import 'package:yqoa/app/oa/oa.dart';
 import 'package:yqoa/app/schedule/schedule.dart';
-import 'package:yqoa/app/home/home.dart';
 import 'package:yqoa/app/addressbook/addressbook.dart';
 import 'package:yqoa/app/my/my.dart';
+import 'package:yqoa/app/home/home.dart';
 
 class App extends StatefulWidget {
   @override
