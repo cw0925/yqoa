@@ -1,9 +1,30 @@
 import 'package:flutter/material.dart';
-import 'mock_data.dart';
-import 'programme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Home extends StatelessWidget {
+
+class Home extends StatefulWidget {
+  @override
+  HomeState createState() => new HomeState();
+}
+
+class HomeState extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      home: new Scaffold(
+        body: Container(
+          color: Colors.white,
+          child: ListView(
+            children: <Widget>[
+              renderHeader(),
+              renderBody(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
   Widget renderHeader() {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: ScreenUtil.statusBarHeight, horizontal: 20),
@@ -49,11 +70,10 @@ class Home extends StatelessWidget {
       ),
     );
   }
-
   Widget renderBody() {
     return GridView.builder(
       shrinkWrap: true,
-      itemCount: programmeList.length,
+      itemCount: 6,
       physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.symmetric(horizontal: 16),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -63,22 +83,63 @@ class Home extends StatelessWidget {
         childAspectRatio: 1,
       ),
       itemBuilder: (context, index) {
-        return Programme(data: programmeList[index]);
+        return renderCell(context,index);
       },
-
     );
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: ListView(
+  /*
+   * 根据image路径获取图片
+   */
+  Image getTabImage(path) {
+    return new Image.asset(path);
+  }
+  Widget renderCell(context,index){
+    var titles = ['CRM','业务管理','财务管理','人事管理','行政管理','售后服务'];
+    var images = [
+      getTabImage('images/home/crm.png'),
+      getTabImage('images/home/business.png'),
+      getTabImage('images/home/finance.png'),
+      getTabImage('images/home/person.png'),
+      getTabImage('images/home/admin.png'),
+      getTabImage('images/home/service.png'),
+    ];
+    return  GestureDetector(
+      onTap: (){
+        pushPage(context,index);
+        },
+      child: Column(
         children: <Widget>[
-          this.renderHeader(),
-          this.renderBody(),
+          Center(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: Stack(
+                fit: StackFit.passthrough,
+                alignment: AlignmentDirectional.center,
+                children: <Widget>[
+                  images[index],
+                  Positioned(
+                    child: Padding(
+                        padding: EdgeInsets.all(5),
+                        child: Text(
+                          titles[index],
+                          style: TextStyle(
+                            fontSize: ScreenUtil().setSp(30),
+                            color: Colors.white,
+                          ),
+                        )
+                    ),
+                  ),
+                ].where((item) => item != null).toList(),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
-}
+  void pushPage(context,index){
+    if(index == 0){
+      Navigator.of(context).pushNamed("/crm");
+    }
+    print(context);
+  }
