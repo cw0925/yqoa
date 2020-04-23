@@ -5,7 +5,6 @@ import 'package:yqoa/app/my/my.dart';
 import 'package:yqoa/app/oa/oa.dart';
 import 'package:yqoa/app/schedule/schedule.dart';
 import 'package:yqoa/app/addressbook/addressbook.dart';
-import 'package:yqoa/app/home/crm.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,13 +20,7 @@ class MainPage extends StatelessWidget {
 //设置字体大小根据系统的“字体大小”辅助选项来进行缩放,默认为false
     ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: true);
 
-    return new MaterialApp(
-        home: new MainPageWidget(),
-      routes: {
-        "/home": (context) => MainPage(),
-        "/crm": (context) => CRM(),
-      },
-    );
+    return new MainPageWidget();
   }
 }
 

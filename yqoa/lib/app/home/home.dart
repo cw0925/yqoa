@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
@@ -10,8 +11,7 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new Scaffold(
+    return new Scaffold(
         body: Container(
           color: Colors.white,
           child: ListView(
@@ -21,7 +21,6 @@ class HomeState extends State<Home> {
             ],
           ),
         ),
-      ),
     );
   }
 }
@@ -139,7 +138,7 @@ class HomeState extends State<Home> {
   }
   void pushPage(context,index){
     if(index == 0){
-      Navigator.of(context).pushNamed("/crm");
+      Navigator.pushNamed(context,"/crm");
     }
     print(context);
   }
