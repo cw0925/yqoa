@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:yqoa/app/home/home.dart';
 import 'package:yqoa/app/my/my.dart';
 import 'package:yqoa/app/oa/oa.dart';
 import 'package:yqoa/app/schedule/schedule.dart';
 import 'package:yqoa/app/addressbook/addressbook.dart';
+import 'package:yqoa/app/home/crm.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,7 +22,11 @@ class MainPage extends StatelessWidget {
     ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: true);
 
     return new MaterialApp(
-        home: new MainPageWidget()
+        home: new MainPageWidget(),
+      routes: {
+        "/home": (context) => MainPage(),
+        "/crm": (context) => CRM(),
+      },
     );
   }
 }
