@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 /// 如果没有约束其高度，则会使用PreferredSizeWidget指定的高度
 
 // ignore: must_be_immutable
-class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
+class MainAppbar extends StatefulWidget implements PreferredSizeWidget {
 
   final double contentHeight; //从外部指定高度
   Color navigationBarBackgroundColor; //设置导航栏背景的颜色
@@ -14,7 +14,7 @@ class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
   List rightIcons;
 
 
-  CustomAppbar({
+  MainAppbar({
     @required this.title,
     this.contentHeight = 44,
     this.navigationBarBackgroundColor = Colors.white,
@@ -24,7 +24,7 @@ class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return new _CustomAppbarState();
+    return new _MainAppbarState();
   }
 
   @override
@@ -36,7 +36,7 @@ class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
 /// 外层Container会填充SafeArea，指定外层Container背景色也会覆盖原来SafeArea的颜色
 ///     var statusheight = MediaQuery.of(context).padding.top;  获取状态栏高度
 
-class _CustomAppbarState extends State<CustomAppbar> {
+class _MainAppbarState extends State<MainAppbar> {
   @override
   void initState() {
     super.initState();
@@ -59,14 +59,12 @@ class _CustomAppbarState extends State<CustomAppbar> {
                 Positioned(
                   left: 0,
                   child: new Container(
-                    padding: const EdgeInsets.only(left: 0),
-                    child:leadingWidget(widget.hasLeft),
+                    padding: const EdgeInsets.only(left: 20),
+                    child:new Text(widget.title,
+                        style: new TextStyle(
+                            fontSize: 17, color: Color(0xFF333333))
+                    ),
                   ),
-                ),
-                new Container(
-                  child: new Text(widget.title,
-                      style: new TextStyle(
-                          fontSize: 17, color: Color(0xFF333333))),
                 ),
                 Positioned(
                   right: 0,
@@ -93,7 +91,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
   /// 右边图标，视情况而定，自己穿参数
   Widget trailingWidget(icons){
     return icons==null?null:new Container(
-        child:buildGrid(icons),
+      child:buildGrid(icons),
     );
   }
   Widget buildGrid(icons) {

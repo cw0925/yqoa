@@ -25,7 +25,7 @@ class _CRMPageState extends State<CRMPage> {
     return Scaffold(
       appBar:  CustomAppbar(
         title: 'CRM',
-        rightIcons: ['images/nav/bell.png','images/nav/bell.png','images/nav/bell.png'],
+        rightIcons: ['images/nav/bell.png','images/nav/bell.png'],
       ),
       body: Center(
         child: Column(
