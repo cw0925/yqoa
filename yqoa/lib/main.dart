@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yqoa/app/app.dart';
-import 'package:yqoa/app/home/crm.dart';
+import 'package:yqoa/app/App.dart';
+import 'package:yqoa/app/home/CRM.dart';
 
 void main() => runApp(App());
 

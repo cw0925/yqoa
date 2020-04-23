@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:yqoa/app/home/home.dart';
-import 'package:yqoa/app/my/my.dart';
-import 'package:yqoa/app/oa/oa.dart';
-import 'package:yqoa/app/schedule/schedule.dart';
-import 'package:yqoa/app/addressbook/addressbook.dart';
+import 'package:yqoa/app/home/Home.dart';
+import 'package:yqoa/app/my/My.dart';
+import 'package:yqoa/app/oa/OA.dart';
+import 'package:yqoa/app/schedule/Schedule.dart';
+import 'package:yqoa/app/addressbook/Addressbook.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -61,6 +61,11 @@ flutter:
     - images/home/finance.png
     - images/home/person.png
     - images/home/service.png
+#    nav
+    - images/nav/back.png
+    - images/nav/bell.png
+    - images/nav/setting.png
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
