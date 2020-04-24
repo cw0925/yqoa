@@ -1,4 +1,4 @@
 class API {
-  ///登录
-  static final String LoginUrl = 'http://ivy.dp.youqii.com/api/authorizations';
+  static final host = 'http://ivy.dp.youqii.com';
+  static final loginUrl = host + '/api/authorizations';
 }
