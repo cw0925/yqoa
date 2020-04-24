@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 class NetUtil {
   static final debug = true;
   static BuildContext context = null;
+
   static final host = 'http://ivy.dp.youqii.com';
   static final baseUrl = host + '/api/';
 
@@ -108,14 +109,11 @@ class NetUtil {
     /// 否则则是表单形式的（拼接在url上）
     Options op;
     if (dataIsJson) {
-//      op = new Options(contentType: ContentType.parse("application/json"));
       op = new Options(contentType: Headers.jsonContentType);
     } else {
-//      contentType: ContentType.parse("application/x-www-form-urlencoded"));
       op = new Options(contentType: Headers.formUrlEncodedContentType);
     }
     op.method = method;
-    print('Options--------$op');
 
     /// 统一带上token
     return _dio.request<Map<String, dynamic>>(
@@ -128,17 +126,19 @@ class NetUtil {
   /// 对请求返回的数据进行统一的处理
   /// 如果成功则将我们需要的数据返回出去，否则进异常处理方法，返回异常信息
   static Future<T> logicalErrorTransform<T>(Response<Map<String, dynamic>> resp) {
+
+    if (debug) {
+      print('resp--------$resp');
+      print('resp.headers--------${resp.headers['authorization']}');
+      print('resp.data--------${resp.data}');
+    }
     if (resp.data != null) {
-      if (resp.data["code"] == 0) {
+      if (resp.data["errcode"] == 0||resp.data["code"] == 0) {
         T realData = resp.data["data"];
         return Future.value(realData);
       }
     }
 
-    if (debug) {
-      print('resp--------$resp');
-      print('resp.data--------${resp.data}');
-    }
     LogicError error;
 //    if (resp.data != null && resp.data["errcode"] == 0) {
 //      if (resp.data['data'] != null) {
@@ -164,9 +164,7 @@ class NetUtil {
 //    }
     return Future.error(error);
   }
-
   ///  获取token
-  ///获取授权token
   static getToken() async {
 //    String token = await LocalStorage.get(LocalStorage.TOKEN_KEY);
     return token;
