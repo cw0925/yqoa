@@ -5,7 +5,7 @@ class CRM extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  CRMPage(title: 'Flutter Demo Home Page');
+    return  CRMPage();
   }
 }
 
