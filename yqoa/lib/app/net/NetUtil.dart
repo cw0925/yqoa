@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 class NetUtil {
   static final debug = true;
   static BuildContext context = null;
-  static final host = 'https://www.';
+  static final host = 'http://ivy.dp.youqii.com';
   static final baseUrl = host + '/api/';
 
   // ignore: argument_type_not_assignable
@@ -108,20 +108,19 @@ class NetUtil {
     /// 根据当前 请求的类型来设置 如果是请求体形式则使用json格式
     /// 否则则是表单形式的（拼接在url上）
     Options op;
+
 //    if (dataIsJson) {
 //      op = new Options(contentType: ContentType.parse("application/json"));
 //    } else {
 //      op = new Options(
 //          contentType: ContentType.parse("application/x-www-form-urlencoded"));
-//    }
-    op.contentType = "application/json";
+//   }
     op.method = method;
 
     /// 统一带上token
     return _dio.request<Map<String, dynamic>>(
         method == "get" ? uri : "$uri?token=$enToken",
-        data: data,
-        options: op);
+        data: data);
 
   }
 

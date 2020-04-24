@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:yqoa/app/net/ApiInterface.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -22,6 +21,16 @@ class HomeState extends State<Home> {
           ),
         ),
     );
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ApiInterface.loginRequest("kevin.chenwei", "878990").then((data){
+      print(data);
+    }).catchError((err){
+      print(err);
+    });
   }
 }
   Widget renderHeader() {
