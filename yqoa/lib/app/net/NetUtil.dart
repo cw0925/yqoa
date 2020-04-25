@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:yqoa/app/utils/SharedPreferencesUtil.dart';
 
 class NetUtil {
   static final debug = true;
@@ -89,7 +90,12 @@ class NetUtil {
   static Future<Response<Map<String, dynamic>>> _httpJson(
       String method, String uri,
       {Map<String, dynamic> data, bool dataIsJson = true}) {
-    var enToken = token == null ? "" : Uri.encodeFull(token);
+    ///获取token
+    var enToken = "";
+    SharedPreferencesUtil().getStringInfo('token').then((token){
+      enToken = token == null ? "" : Uri.encodeFull(token);
+    }).catchError((err){});
+//    var enToken = token == null ? "" : Uri.encodeFull(token);
 
     /// 如果为 get方法，则进行参数拼接
     if (method == "get") {
@@ -114,7 +120,7 @@ class NetUtil {
       op = new Options(contentType: Headers.formUrlEncodedContentType);
     }
     op.method = method;
-
+    print('<token>------$enToken');
     /// 统一带上token
     return _dio.request<Map<String, dynamic>>(
         method == "get" ? uri : "$uri?token=$enToken",
@@ -132,6 +138,12 @@ class NetUtil {
       print('resp.headers--------${resp.headers['authorization']}');
       print('resp.data--------${resp.data}');
     }
+    if(resp.headers['authorization'] != null){
+      var authorization = resp.headers['authorization'];
+      print('authorization--------${authorization[0]}');
+      SharedPreferencesUtil().setStringInfo('token',authorization[0]);
+    }
+
     if (resp.data != null) {
       if (resp.data["errcode"] == 0||resp.data["code"] == 0) {
         T realData = resp.data["data"];
@@ -166,7 +178,10 @@ class NetUtil {
   }
   ///  获取token
   static getToken() async {
-//    String token = await LocalStorage.get(LocalStorage.TOKEN_KEY);
+    var token = "";
+    SharedPreferencesUtil().getStringInfo("token").then((res){
+      token = res;
+    }).catchError((err){});
     return token;
   }
 }

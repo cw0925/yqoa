@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yqoa/app/widget/CustomAppbar.dart';
-import 'package:yqoa/app/utils/SharedPreferencesUtil.dart';
+//import 'package:yqoa/app/utils/SharedPreferencesUtil.dart';
 
 class CRM extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return  CRMPage();
@@ -47,12 +46,12 @@ class _CRMPageState extends State<CRMPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    SharedPreferencesUtil spDataUtil = new SharedPreferencesUtil();
-
-    var name = spDataUtil.getStringInfo("name").toString();
-    var sex = spDataUtil.getStringInfo("sex");
-
-    print(name);
-    print(sex);
+//    SharedPreferencesUtil spDataUtil = new SharedPreferencesUtil();
+//
+//    var name = spDataUtil.getStringInfo("name").toString();
+//    var sex = spDataUtil.getStringInfo("sex");
+//
+//    print(name);
+//    print(sex);
   }
 }
