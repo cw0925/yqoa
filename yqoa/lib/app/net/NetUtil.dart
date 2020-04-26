@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:yqoa/app/utils/SharedPreferencesUtil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NetUtil {
   static final debug = true;
@@ -80,6 +80,7 @@ class NetUtil {
     FormData formData = FormData.fromMap({
       "multipartFile": await MultipartFile.fromFile(filePath, filename: name),
     });
+    token = getToken();
     var enToken = token == null ? "" : Uri.encodeFull(token);
     return _dio
         .put<Map<String, dynamic>>("$uri?token=$enToken", data: formData)
@@ -88,15 +89,12 @@ class NetUtil {
 
 
   static Future<Response<Map<String, dynamic>>> _httpJson(
+
       String method, String uri,
       {Map<String, dynamic> data, bool dataIsJson = true}) {
     ///获取token
-    var enToken = "";
-    SharedPreferencesUtil().getStringInfo('token').then((token){
-      enToken = token == null ? "" : Uri.encodeFull(token);
-    }).catchError((err){});
-//    var enToken = token == null ? "" : Uri.encodeFull(token);
-
+    token = getToken();
+    var enToken = token == null ? "" : Uri.encodeFull(token);
     /// 如果为 get方法，则进行参数拼接
     if (method == "get") {
       dataIsJson = false;
@@ -105,12 +103,10 @@ class NetUtil {
       }
       data["token"] = token;
     }
-
     if (debug) {
       print('<net url>------$uri');
       print('<net params>------$data');
     }
-
     /// 根据当前 请求的类型来设置 如果是请求体形式则使用json格式
     /// 否则则是表单形式的（拼接在url上）
     Options op;
@@ -135,13 +131,12 @@ class NetUtil {
 
     if (debug) {
       print('resp--------$resp');
-      print('resp.headers--------${resp.headers['authorization']}');
-      print('resp.data--------${resp.data}');
+//      print('resp.headers--------${resp.headers['authorization']}');
+//      print('resp.data--------${resp.data}');
     }
     if(resp.headers['authorization'] != null){
-      var authorization = resp.headers['authorization'];
-      print('authorization--------${authorization[0]}');
-      SharedPreferencesUtil().setStringInfo('token',authorization[0]);
+      String authorization = resp.headers['authorization'][0];
+      saveToken(authorization);
     }
 
     if (resp.data != null) {
@@ -176,12 +171,16 @@ class NetUtil {
 //    }
     return Future.error(error);
   }
-  ///  获取token
-  static getToken() async {
-    var token = "";
-    SharedPreferencesUtil().getStringInfo("token").then((res){
-      token = res;
-    }).catchError((err){});
+//  保存token
+  static saveToken(value) async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("token", value);
+  }
+//  获取token
+  static getToken() async{
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.get("token");
+    print('token ======$token');
     return token;
   }
 }
