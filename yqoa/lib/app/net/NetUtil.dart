@@ -89,11 +89,10 @@ class NetUtil {
 
 
   static Future<Response<Map<String, dynamic>>> _httpJson(
-
       String method, String uri,
-      {Map<String, dynamic> data, bool dataIsJson = true}) {
+      {Map<String, dynamic> data, bool dataIsJson = true}) async{
     ///获取token
-    token = getToken();
+    token = await getToken();
     var enToken = token == null ? "" : Uri.encodeFull(token);
     /// 如果为 get方法，则进行参数拼接
     if (method == "get") {
@@ -169,6 +168,7 @@ class NetUtil {
 //    } else {
 //      error = unknowError;
 //    }
+    print(error);
     return Future.error(error);
   }
 //  保存token
@@ -179,9 +179,7 @@ class NetUtil {
 //  获取token
   static getToken() async{
     final prefs = await SharedPreferences.getInstance();
-    final token = prefs.get("token");
-    print('token ======$token');
-    return token;
+    return prefs.getString("token");
   }
 }
 
