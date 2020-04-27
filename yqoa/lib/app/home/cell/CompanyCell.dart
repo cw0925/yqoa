@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:yqoa/app/home/model/company_entity.dart';
 
 // ignore: must_be_immutable
 class CompanyCell extends StatefulWidget {
 
-  final double contentHeight; //从外部指定高度
-  Color navigationBarBackgroundColor; //设置导航栏背景的颜色
-  String title;
-  bool hasLeft;
-  List rightIcons;
-
+  final CompanyData data;
 
   CompanyCell({
-    @required this.title,
-    this.contentHeight = 44,
-    this.navigationBarBackgroundColor = Colors.white,
-    this.hasLeft = true,
-    this.rightIcons
+    @required this.data
   }) : super();
 
   @override
@@ -24,18 +16,14 @@ class CompanyCell extends StatefulWidget {
   }
 }
 class _CompanyCellState extends State<CompanyCell> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text("公司名称"),
-          Text("电话")
+          Text(widget.data.name),
+          Text(widget.data.tel)
         ],
     );
   }
