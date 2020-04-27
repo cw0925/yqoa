@@ -31,8 +31,12 @@ class _CompanyCellState extends State<CompanyCell> {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      child: Text('cell'),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text("公司名称"),
+          Text("电话")
+        ],
     );
   }
 }

@@ -28,7 +28,7 @@ class _CRMPageState extends State<CRMPage> {
         title: 'CRM',
         rightIcons: ['images/nav/bell.png'],
       ),
-      body: Center(
+      body: Container(
         child: ListView.builder(
             itemCount: widgets.length,
             itemBuilder: (BuildContext context, int index) {
