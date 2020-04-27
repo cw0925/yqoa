@@ -48,44 +48,66 @@ class _MenuAppbarState extends State<MenuAppbar> {
       color: widget.navigationBarBackgroundColor,
       child: new SafeArea(
         top: true,
-        child: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              leadingWidget(widget.hasLeft),
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new Text(widget.title,
-                      style: new TextStyle(
-                          fontSize: 17, color: Color(0xFF333333))),
-                  new Icon(
-                    Icons.wb_sunny,
-                    size: 20,
-                    color: Color(0xFF999999),
+        child: new Container(
+            decoration: new UnderlineTabIndicator(
+              borderSide: BorderSide(width: 1.0, color: Color(0xFFeeeeee)),
+            ),
+            height: widget.contentHeight,
+            child: new Stack(
+              children: <Widget>[
+                Container(
+                  child: Row(
+                    children: <Widget>[
+                      leadingWidget(widget.hasLeft),
+                      Expanded(
+                        flex: 1,
+                        child: GestureDetector(
+                          onTap: (){
+                            print('title');
+                          },
+                          child: Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(widget.title,
+                                    style: new TextStyle(
+                                        fontSize: 17, color: Color(0xFF333333))),
+                                Image(image: AssetImage("images/nav/drop.png"),width: 15,height: 15)
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      trailingWidget(widget.rightIcons),
+                    ],
                   ),
-                ],
-              ),
-              trailingWidget(widget.rightIcons),
-            ],
-          ),
-        ),
+                )
+              ],
+            )),
       ),
     );
   }
   /// 左边图标，视情况而定，自己穿参数
   Widget leadingWidget(hasLeft){
-    return hasLeft?IconButton(
-      iconSize: 16,
-      icon: ImageIcon(AssetImage("images/nav/back.png")),
-      onPressed: () {
-        Navigator.pop(context);
-      },
+    return hasLeft?Container(
+      width: 50.0*widget.rightIcons.length,
+      child: Row(
+        children: <Widget>[
+          IconButton(
+            iconSize: 16,
+            icon: ImageIcon(AssetImage("images/nav/back.png")),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )
+        ],
+      ),
     ):null;
   }
   /// 右边图标，视情况而定，自己穿参数
   Widget trailingWidget(icons){
     return icons==null?null:new Container(
+      width: 50.0*widget.rightIcons.length,
       child:buildGrid(icons),
     );
   }
@@ -95,7 +117,6 @@ class _MenuAppbarState extends State<MenuAppbar> {
     for(var item in icons) {
       tiles.add(
           new Row(
-            mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 IconButton(
                   iconSize: 16,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:yqoa/app/net/ApiInterface.dart';
+//import 'package:yqoa/app/net/ApiInterface.dart';
 
 
 class Home extends StatefulWidget {
@@ -28,11 +28,11 @@ class HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
 
-    ApiInterface.loginRequest("kevin.chenwei", "878990").then((data){
+//    ApiInterface.loginRequest("kevin.chenwei", "878990").then((data){
 //      print(data);
-    }).catchError((err){
-      print(err);
-    });
+//    }).catchError((err){
+//      print(err);
+//    });
 
   }
 }
@@ -151,5 +151,15 @@ class HomeState extends State<Home> {
   void pushPage(context,index){
     if(index == 0){
       Navigator.pushNamed(context,"/crm");
+    }else if(index == 1){
+      Navigator.pushNamed(context,"/business");
+    }else if(index == 2){
+      Navigator.pushNamed(context,"/finance");
+    }else if(index == 3){
+      Navigator.pushNamed(context,"/person");
+    }else if(index == 4){
+      Navigator.pushNamed(context,"/admin");
+    }else if(index == 5){
+      Navigator.pushNamed(context,"/service");
     }
   }
