@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/single_child_widget.dart';
 import 'MsgDialog.dart';
 import 'package:yqoa/app/widget/toast/toast.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -624,7 +623,7 @@ abstract class BaseFuntion {
   }
 
   //可以复写SingleChildCloneableWidget
-  List<SingleChildWidget> getProvider() {
+  List<SingleChildCloneableWidget> getProvider() {
     return null;
   }
 }

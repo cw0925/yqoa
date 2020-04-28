@@ -149,7 +149,7 @@ class HomeState extends State<Home> {
     if(index == 0){
       Navigator.pushNamed(context,"/crm");
     }else if(index == 1){
-      Navigator.pushNamed(context,"/business");
+      Navigator.pushNamed(context,"/test");
     }else if(index == 2){
       Navigator.pushNamed(context,"/finance");
     }else if(index == 3){
