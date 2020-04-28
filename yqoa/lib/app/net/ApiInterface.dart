@@ -18,10 +18,18 @@ class ApiInterface {
     return NetUtil.postJson(_API_LOGIN,
         {"username": username, "password": password});
   }
+  ///公司管理数据
   static final String _API_COMPANY = 'companies';
   static Future<Map<String, dynamic>> getCompanyData(
       LoginInvalidHandler handler) async {
     return NetUtil.getJson(_API_COMPANY, {})
+        .catchError(handler.loginInvalidHandler);
+  }
+  ///通讯录
+  static final String _API_ADDRESSBOOK = 'contacts';
+  static Future<Map<String, dynamic>> getContactsData(
+      LoginInvalidHandler handler) async {
+    return NetUtil.getJson(_API_ADDRESSBOOK, {})
         .catchError(handler.loginInvalidHandler);
   }
 }

@@ -80,7 +80,7 @@ class NetUtil {
     FormData formData = FormData.fromMap({
       "multipartFile": await MultipartFile.fromFile(filePath, filename: name),
     });
-    token = await getToken();
+    token = getToken();
     var enToken = token == null ? "" : Uri.encodeFull(token);
     return _dio
         .put<Map<String, dynamic>>("$uri?token=$enToken", data: formData)
@@ -100,21 +100,11 @@ class NetUtil {
       if (data == null) {
         data = new Map<String, dynamic>();
       }
-//      if (params != null && params.isNotEmpty) {
-//        StringBuffer stringBuffer = new StringBuffer("?");
-//        params.forEach((key, value) {
-//          stringBuffer.write("$key" + "=" + "$value" + "&");
-//        });
-//        String paramStr = stringBuffer.toString();
-//        paramStr = paramStr.substring(0, paramStr.length - 1);
-//        url += paramStr;
-//      }
+//      data["token"] = token;
     }
     if (debug) {
       print('<net url>------$uri');
       print('<net params>------$data');
-      print('<token>------$token');
-      print('<enToken >------$enToken');
     }
     /// 根据当前 请求的类型来设置 如果是请求体形式则使用json格式
     /// 否则则是表单形式的（拼接在url上）
@@ -126,11 +116,13 @@ class NetUtil {
     }
     op.method = method;
     op.headers["authorization"] = token;
+    print('<token>------$enToken');
     /// 统一带上token
     return _dio.request<Map<String, dynamic>>(
         method == "get" ? uri : "$uri?token=$enToken",
         data: data,
         options: op);
+
   }
 
   /// 对请求返回的数据进行统一的处理
@@ -139,7 +131,8 @@ class NetUtil {
 
     if (debug) {
 //      print('resp--------$resp');
-//      print('resp.data--------${resp.data}');
+//      print('resp.headers--------${resp.headers['authorization']}');
+      print('resp.data--------${resp.data}');
     }
     if(resp.headers['authorization'] != null){
       String authorization = resp.headers['authorization'][0];
@@ -148,13 +141,9 @@ class NetUtil {
 
     if (resp.data != null) {
       if (resp.data["errcode"] == 0||resp.data["code"] == 0) {
-//        T realData = resp.data["data"];
         T realData = resp.data as T;
-//        print("real======$realData");
         return Future.value(realData);
       }
-    }else{
-      print('object');
     }
 
     LogicError error;

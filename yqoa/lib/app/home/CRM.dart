@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yqoa/app/home/model/company_entity.dart';
 import 'package:yqoa/app/net/ApiInterface.dart';
-import 'package:yqoa/app/widget/MenuAppbar.dart';
+import 'package:yqoa/app/widget/appbar/MenuAppbar.dart';
 import 'cell/CompanyCell.dart';
 import 'package:yqoa/app/net/ErrorHandler.dart';
-import 'package:yqoa/app/home/model/company_entity.dart';
 
 class CRM extends StatelessWidget {
   @override
@@ -13,16 +13,14 @@ class CRM extends StatelessWidget {
 }
 
 class CRMPage extends StatefulWidget {
-
-  CRMPage({Key key}) : super(key: key);
-
+  CRMPage({Key key, this.title}) : super(key: key);
+  final String title;
   @override
   _CRMPageState createState() => _CRMPageState();
 }
 
 class _CRMPageState extends State<CRMPage> {
-
-  List<CompanyData> companyData = <CompanyData>[];
+  List<CompanyData> companyData =  List<CompanyData>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +33,7 @@ class _CRMPageState extends State<CRMPage> {
         child: ListView.builder(
             itemCount: companyData.length,
             itemBuilder: (BuildContext context, int index) {
-              return getItem(companyData[index]);
+              return CompanyCell( data:companyData[index]);
             }),
       ),
         floatingActionButton: FloatingActionButton(
@@ -51,17 +49,12 @@ class _CRMPageState extends State<CRMPage> {
     super.initState();
     _getCompanyData();
   }
-  Widget getItem(CompanyData item) {
-    return CompanyCell(data: item,);
-  }
-  //  获取公司列表数据
-  Future<List<CompanyEntity>> _getCompanyData() {
-    // ignore: missing_return
+  _getCompanyData(){
     ApiInterface.getCompanyData(LoginInvalidHandler(context)).then((res){
       if(res["errcode"] == 0){
-        CompanyEntity model = CompanyEntity().fromJson(res);
+        CompanyEntity company = CompanyEntity().fromJson(res);
         setState(() {
-          companyData = model.data;
+          companyData = company.data;
         });
       }
     }).catchError((err){});

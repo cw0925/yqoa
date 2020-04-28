@@ -22,6 +22,8 @@ dependencies:
   flutter_screenutil: ^1.0.2
   dio: 3.0.9
   shared_preferences: ^0.5.7
+  fluttertoast: ^4.0.1
+  provider: ^3.1.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -68,6 +70,12 @@ flutter:
     - images/nav/bell.png
     - images/nav/setting.png
     - images/nav/drop.png
+#    login
+    - images/login/login_logo.png
+#    base
+    - images/load_error_view.png
+    - images/mine.jpg
+    - images/ic_empty.png
 
 
 

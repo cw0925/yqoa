@@ -36,6 +36,8 @@ companyDataFromJson(CompanyData data, Map<String, dynamic> json) {
 	}
 	if (json['name'] != null) {
 		data.name = json['name']?.toString();
+	}else{
+		data.name = '';
 	}
 	if (json['ename'] != null) {
 		data.ename = json['ename']?.toString();
