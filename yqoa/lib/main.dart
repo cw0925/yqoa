@@ -20,8 +20,9 @@ class App extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainPage(), //启动MainPage
+      home: LoginPage(), //启动MainPage
       routes: <String, WidgetBuilder>{
+        "/app": (BuildContext context) => MainPage(),  //主页面
         "/crm": (BuildContext context) => CRM(),  //主页面
         "/business": (BuildContext context) => Business(),  //主页面
         "/finance": (BuildContext context) => Finance(),  //主页面

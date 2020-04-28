@@ -76,6 +76,8 @@ flutter:
     - images/load_error_view.png
     - images/mine.jpg
     - images/ic_empty.png
+#    my
+    - images/my/default.png
 
 
 

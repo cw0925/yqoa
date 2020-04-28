@@ -24,12 +24,6 @@ class HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-//
-//    ApiInterface.loginRequest("kevin.chenwei", "878990").then((data){
-//      print(data);
-//    }).catchError((err){
-//      print(err);
-//    });
 
   }
 }
@@ -40,7 +34,7 @@ class HomeState extends State<Home> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
                 '04月22日',

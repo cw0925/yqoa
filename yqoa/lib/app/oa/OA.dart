@@ -4,21 +4,16 @@ class OA extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  OAPage(title: 'Flutter Demo Home Page');
+    return  OAPage();
   }
 }
 
 class OAPage extends StatefulWidget {
-  OAPage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
   @override
   _OAPageState createState() => _OAPageState();
 }
 
 class _OAPageState extends State<OAPage> with SingleTickerProviderStateMixin {
-
   TabController _tabController;
   @override
   void initState() {

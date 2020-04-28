@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:yqoa/app/base/Base.dart';
-//import 'package:flutter_base_widget/network/bean/login_response_entity.dart';
-//import 'package:flutter_base_widget/network/intercept/showloading_intercept.dart';
-//import 'package:flutter_base_widget/network/requestUtil.dart';
-//import 'package:flutter_base_widget/test_package/outpage/second_page.dart';
 
 class TestPage extends BaseWidget {
   @override

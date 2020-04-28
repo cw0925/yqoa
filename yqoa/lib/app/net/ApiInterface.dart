@@ -18,6 +18,12 @@ class ApiInterface {
     return NetUtil.postJson(_API_LOGIN,
         {"username": username, "password": password});
   }
+  ///检查登录状态，免登陆
+  static final String _API_CHECK = 'check';
+  static Future<Map<String, dynamic>> checkRequest() async {
+    return NetUtil.postJson(_API_CHECK, {});
+  }
+
   ///公司管理数据
   static final String _API_COMPANY = 'companies';
   static Future<Map<String, dynamic>> getCompanyData(

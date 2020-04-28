@@ -122,7 +122,6 @@ class NetUtil {
         method == "get" ? uri : "$uri?token=$enToken",
         data: data,
         options: op);
-
   }
 
   /// 对请求返回的数据进行统一的处理
@@ -169,7 +168,18 @@ class NetUtil {
 //    } else {
 //      error = unknowError;
 //    }
-    print(error);
+    if (resp.data["errcode"] != 0||resp.data["code"] != 0) {
+      /// token失效 重新登录  后端定义的code码
+      if (resp.data["errcode"] == 10401) {
+//        NavigatorUtils.goPwdLogin(context);
+//        print('token失效 重新登录----${resp.data["errcode"]}');
+//        Navigator.pushNamed(context,"/app");
+      }else{
+        error = new LogicError(resp.data["errcode"], resp.data["errmsg"]);
+      }
+    }else {
+      error = unknowError;
+    }
     return Future.error(error);
   }
 //  保存token

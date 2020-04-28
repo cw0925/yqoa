@@ -60,8 +60,8 @@ class _AddressBookPageState extends State<AddressBookPage> {
   }
   List<Widget> _buildList() {
     List<Widget> widgets = [];
-    List<String> names = List<String>();
     _contactsData.keys.forEach((key) {
+      List<String> names = List<String>();
       Map item = _contactsData[key];
       item.keys.forEach((info){
         names.add(item[info]["name"]);
