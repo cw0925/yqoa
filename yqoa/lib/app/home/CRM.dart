@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yqoa/app/net/ApiInterface.dart';
 import 'package:yqoa/app/widget/MenuAppbar.dart';
 import 'cell/CompanyCell.dart';
+import 'package:yqoa/app/net/ErrorHandler.dart';
+import 'package:yqoa/app/home/model/company_entity.dart';
 
 class CRM extends StatelessWidget {
   @override
@@ -10,16 +13,16 @@ class CRM extends StatelessWidget {
 }
 
 class CRMPage extends StatefulWidget {
-  CRMPage({Key key, this.title}) : super(key: key);
 
-  final String title;
+  CRMPage({Key key}) : super(key: key);
 
   @override
   _CRMPageState createState() => _CRMPageState();
 }
 
 class _CRMPageState extends State<CRMPage> {
-  List<Widget> widgets;
+
+  List<CompanyData> companyData = <CompanyData>[];
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +33,9 @@ class _CRMPageState extends State<CRMPage> {
       ),
       body: Container(
         child: ListView.builder(
-            itemCount: widgets.length,
+            itemCount: companyData.length,
             itemBuilder: (BuildContext context, int index) {
-              return getItem(index);
+              return getItem(companyData[index]);
             }),
       ),
         floatingActionButton: FloatingActionButton(
@@ -46,30 +49,21 @@ class _CRMPageState extends State<CRMPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    widgets = List<Widget>();
-    for (int i = 0; i < 80; i++) {
-      widgets.add(getItem(i));
-    }
-//    SharedPreferencesUtil spDataUtil = new SharedPreferencesUtil();
-//
-//    var name = spDataUtil.getStringInfo("name").toString();
-//    var sex = spDataUtil.getStringInfo("sex");
-//
-//    print(name);
-//    print(sex);
+    _getCompanyData();
   }
-//  Widget getItem(int index) {
-//    return GestureDetector(
-//      onTap: () {
-//        print("item click ******************* $index");
-//      },
-//      child: Padding(
-//        padding: EdgeInsets.all(10.0),
-//        child: Text("text $index"),
-//      ),
-//    );
-//  }
-  Widget getItem(int index) {
-    return CompanyCell(title: 'aaaa',);
+  Widget getItem(CompanyData item) {
+    return CompanyCell(data: item,);
+  }
+  //  获取公司列表数据
+  Future<List<CompanyEntity>> _getCompanyData() {
+    // ignore: missing_return
+    ApiInterface.getCompanyData(LoginInvalidHandler(context)).then((res){
+      if(res["errcode"] == 0){
+        CompanyEntity model = CompanyEntity().fromJson(res);
+        setState(() {
+          companyData = model.data;
+        });
+      }
+    }).catchError((err){});
   }
 }

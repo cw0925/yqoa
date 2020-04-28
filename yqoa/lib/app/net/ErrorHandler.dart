@@ -19,6 +19,7 @@ class LoginInvalidHandler {
 //          gravity: ToastGravity.CENTER,
 //          timeInSecForIos: 3);
 //      NavigatorUtils.goPwdLogin(currentContext);
+    print('您的登录已过期，请重新登录');
       return Future.error(errorMsg);
     }
     return Future.error(errorMsg);

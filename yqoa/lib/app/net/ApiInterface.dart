@@ -1,5 +1,5 @@
 import 'NetUtil.dart';
-import 'common_error_handler_utils.dart';
+import 'ErrorHandler.dart';
 
 /// 所有接口请求
 
@@ -17,5 +17,11 @@ class ApiInterface {
       String username, String password) async {
     return NetUtil.postJson(_API_LOGIN,
         {"username": username, "password": password});
+  }
+  static final String _API_COMPANY = 'companies';
+  static Future<Map<String, dynamic>> getCompanyData(
+      LoginInvalidHandler handler) async {
+    return NetUtil.getJson(_API_COMPANY, {})
+        .catchError(handler.loginInvalidHandler);
   }
 }
