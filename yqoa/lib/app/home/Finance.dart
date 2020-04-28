@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yqoa/app/widget/MenuAppbar.dart';
+import 'package:yqoa/app/widget/appbar/MenuAppbar.dart';
 
 class Finance extends StatelessWidget {
   @override

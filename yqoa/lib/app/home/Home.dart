@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-//import 'package:yqoa/app/net/ApiInterface.dart';
+import 'package:yqoa/app/net/ApiInterface.dart';
 
 
 class Home extends StatefulWidget {
@@ -12,14 +12,11 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        body: Container(
-          color: Colors.white,
-          child: ListView(
-            children: <Widget>[
-              renderHeader(),
-              renderBody(),
-            ],
-          ),
+        body: ListView(
+          children: <Widget>[
+            renderHeader(),
+            renderBody()
+          ],
         ),
     );
   }
@@ -27,7 +24,7 @@ class HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
+//
 //    ApiInterface.loginRequest("kevin.chenwei", "878990").then((data){
 //      print(data);
 //    }).catchError((err){

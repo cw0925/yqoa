@@ -19,12 +19,26 @@ class _CompanyCellState extends State<CompanyCell> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(widget.data.name),
-          Text(widget.data.tel)
-        ],
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(widget.data.name),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                    child: Text(widget.data.tel),
+                  )
+                ],
+              ),
+            ),
+            Divider(height: 1.0,indent: 20.0,endIndent: 20,color: Colors.grey,)
+          ]
+      ),
     );
   }
 }

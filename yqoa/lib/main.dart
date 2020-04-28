@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yqoa/app/App.dart';
+import 'package:yqoa/app/login/Login.dart';
 
 import 'package:yqoa/app/home/CRM.dart';
 import 'package:yqoa/app/home/Business.dart';
@@ -18,6 +18,7 @@ class App extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
+      home: LoginPage(), //启动MainPage
       routes: <String, WidgetBuilder>{
         "/crm": (BuildContext context) => CRM(),  //主页面
         "/business": (BuildContext context) => Business(),  //主页面
@@ -26,7 +27,6 @@ class App extends StatelessWidget {
         "/admin": (BuildContext context) => Admin(),  //主页面
         "/service": (BuildContext context) => Service(),  //主页面
       },
-      home: MainPage(), //启动MainPage
     );
   }
 }

@@ -100,7 +100,7 @@ class NetUtil {
       if (data == null) {
         data = new Map<String, dynamic>();
       }
-      data["token"] = token;
+//      data["token"] = token;
     }
     if (debug) {
       print('<net url>------$uri');
@@ -115,6 +115,7 @@ class NetUtil {
       op = new Options(contentType: Headers.formUrlEncodedContentType);
     }
     op.method = method;
+    op.headers["authorization"] = token;
     print('<token>------$enToken');
     /// 统一带上token
     return _dio.request<Map<String, dynamic>>(
@@ -129,9 +130,9 @@ class NetUtil {
   static Future<T> logicalErrorTransform<T>(Response<Map<String, dynamic>> resp) {
 
     if (debug) {
-      print('resp--------$resp');
+//      print('resp--------$resp');
 //      print('resp.headers--------${resp.headers['authorization']}');
-//      print('resp.data--------${resp.data}');
+      print('resp.data--------${resp.data}');
     }
     if(resp.headers['authorization'] != null){
       String authorization = resp.headers['authorization'][0];
@@ -140,7 +141,7 @@ class NetUtil {
 
     if (resp.data != null) {
       if (resp.data["errcode"] == 0||resp.data["code"] == 0) {
-        T realData = resp.data["data"];
+        T realData = resp.data as T;
         return Future.value(realData);
       }
     }
