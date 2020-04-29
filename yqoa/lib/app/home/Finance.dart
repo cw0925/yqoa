@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yqoa/app/widget/appbar/MenuAppbar.dart';
+import 'package:yqoa/app/widget/appbar/CustomAppbar.dart';
 
 class Finance extends StatelessWidget {
   @override
@@ -22,9 +22,9 @@ class _FinancePageState extends State<FinancePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  MenuAppbar(
+      appBar:  CustomAppbar(
         title: 'CRM',
-        rightIcons: ['images/nav/bell.png'],
+        rightIcons: ['images/nav/bell.png','images/nav/bell.png'],
       ),
       body: Center(
         child: Column(
