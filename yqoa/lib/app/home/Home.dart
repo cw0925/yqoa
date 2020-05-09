@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yqoa/app/net/ApiInterface.dart';
+import 'package:yqoa/app/untils/SpUtil.dart';
 
 
 class Home extends StatefulWidget {
@@ -9,6 +11,9 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
+
+  String date = '';
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -24,10 +29,9 @@ class HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
   }
 }
-  Widget renderHeader() {
+  Widget renderHeader(){
     return Padding(
       padding: EdgeInsets.symmetric(vertical: ScreenUtil.statusBarHeight, horizontal: 20),
       child: Row(
@@ -37,7 +41,7 @@ class HomeState extends State<Home> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                '04月22日',
+                getDate(),
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -71,6 +75,16 @@ class HomeState extends State<Home> {
         ],
       ),
     );
+  }
+  String getDate(){
+    int month = new DateTime.now().month;
+    int day = new DateTime.now().day;
+    String date =  month.toString()+ '月'+ day.toString() +'日';
+    return date;
+  }
+  Future<String> getName() async{
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString("name");
   }
   Widget renderBody() {
     return GridView.builder(
