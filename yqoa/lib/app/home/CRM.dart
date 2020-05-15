@@ -21,6 +21,7 @@ class CRMPage extends StatefulWidget {
 
 class _CRMPageState extends State<CRMPage> {
   List<CompanyData> companyData =  List<CompanyData>();
+  bool isShow = false;
 
   @override
   Widget build(BuildContext context) {

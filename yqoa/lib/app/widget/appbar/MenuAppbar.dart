@@ -19,7 +19,7 @@ class MenuAppbar extends StatefulWidget implements PreferredSizeWidget {
     this.contentHeight = 44,
     this.navigationBarBackgroundColor = Colors.white,
     this.hasLeft = true,
-    this.rightIcons
+    this.rightIcons,
   }) : super();
 
   @override

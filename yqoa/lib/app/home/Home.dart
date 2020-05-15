@@ -29,6 +29,7 @@ class HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print('名字：'+SpUtil.getString('name'));
   }
 }
   Widget renderHeader(){
@@ -49,7 +50,7 @@ class HomeState extends State<Home> {
                 ),
               ),
               Text(
-                '张三',
+                SpUtil.getString('name'),
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -82,10 +83,7 @@ class HomeState extends State<Home> {
     String date =  month.toString()+ '月'+ day.toString() +'日';
     return date;
   }
-  Future<String> getName() async{
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString("name");
-  }
+
   Widget renderBody() {
     return GridView.builder(
       shrinkWrap: true,

@@ -13,18 +13,15 @@ import 'package:yqoa/app/home/Service.dart';
 import 'package:yqoa/app/home/Test.dart';
 
 import 'package:yqoa/app/untils/SpUtil.dart';
+
 void main(){
-//  realRunApp();
   runApp(App());
+  //初始化本地存储
+  SpUtil.getInstance();
   //设置Android头部的导航栏透明
   SystemUiOverlayStyle systemUiOverlayStyle =
   SystemUiOverlayStyle(statusBarColor: Colors.transparent);
   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-}
-void realRunApp() async {
-  bool success = (await SpUtil.getInstance()) as bool;
-  print("init-"+success.toString());
-  runApp(App());
 }
 
 class App extends StatelessWidget {
@@ -35,7 +32,11 @@ class App extends StatelessWidget {
       child: new MaterialApp(
         debugShowCheckedModeBanner: false,  //去除右上角的Debug标签
         theme: new ThemeData(
+          brightness: Brightness.light,
           primarySwatch: Colors.blue,
+        ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
         ),
         home: LoginPage(), //启动MainPage
         routes: <String, WidgetBuilder>{
