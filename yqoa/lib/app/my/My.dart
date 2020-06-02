@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:yqoa/app/net/NetUtil.dart';
+import 'package:yqoa/app/untils/SpUtil.dart';
 import 'package:yqoa/app/widget/appbar/MainAppbar.dart';
 
 class My extends StatelessWidget {
@@ -110,5 +112,15 @@ class _MyPageState extends State<MyPage> {
         ],
       )
     );
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    String uid =  SpUtil.getString('uid');
+    String url = 'users/'+ uid;
+    NetUtil.getJson(url, {}).then((res){
+      print(res);
+    });
   }
 }

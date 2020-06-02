@@ -38,4 +38,11 @@ class ApiInterface {
     return NetUtil.getJson(_API_ADDRESSBOOK, {})
         .catchError(handler.loginInvalidHandler);
   }
+  ///个人信息
+  static final String _API_MYINFO = 'users';
+  static Future<Map<String, dynamic>> getMyInfo(
+      LoginInvalidHandler handler) async {
+    return NetUtil.getJson(_API_MYINFO, {})
+        .catchError(handler.loginInvalidHandler);
+  }
 }

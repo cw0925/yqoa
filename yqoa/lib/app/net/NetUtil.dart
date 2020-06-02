@@ -123,7 +123,6 @@ class NetUtil {
         data: data,
         options: op);
   }
-
   /// 对请求返回的数据进行统一的处理
   /// 如果成功则将我们需要的数据返回出去，否则进异常处理方法，返回异常信息
   static Future<T> logicalErrorTransform<T>(Response<Map<String, dynamic>> resp) {

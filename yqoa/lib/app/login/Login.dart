@@ -214,7 +214,9 @@ class _LoginPageState extends State<LoginPage> {
     ApiInterface.loginRequest(account, pwd).then((res) async {
       if(res["errcode"] == 0){
         String name = res["data"]["real_name"];
+        String uid = res["data"]["uid"];
         SpUtil.putString('name', name);
+        SpUtil.putString('uid', uid);
         Navigator.pushNamed(context,"/app");
       }else{
         ToastUtils.showToast(res["errmsg"]);
